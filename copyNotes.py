@@ -5,8 +5,6 @@ import os
 import shutil
 import sys
 
-print(len(sys.argv))
-
 if len(sys.argv) == 1:
     switch = True
 else:
