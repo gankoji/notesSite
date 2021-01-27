@@ -43,5 +43,4 @@ for root, dirs, files in os.walk(sourceDirectory):
     dirs[:] = [d for d in dirs if d not in excl_dirs]
     for f in files:
         if f.endswith(".md"):
-            print(f)
             shutil.copy2(os.path.join(root,f), os.path.join(destinationDirectory, f))
