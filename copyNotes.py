@@ -22,7 +22,16 @@ else:
     sourceDirectory = "/Users/jakebailey/OneDrive/Org/Slipbox"
     destinationDirectory = "/Users/jakebailey/OneDrive/Workspace/notesSite/content"
 
-
+if len(sys.argv) > 2:
+    ## We've been passed source
+    if len(sys.argv) < 4:
+        ## But not dest. Error
+        print("If specifying source, you must also specify dest.")
+        exit(-1)
+    
+    sourceDirectory = str(sys.argv[2])
+    destinationDirectory = str(sys.argv[3])
+    
 ## Clean destination
 for root, dires, files in os.walk(destinationDirectory):
     for f in files:
