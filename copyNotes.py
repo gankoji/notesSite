@@ -31,13 +31,17 @@ if len(sys.argv) > 2:
     
     sourceDirectory = str(sys.argv[2])
     destinationDirectory = str(sys.argv[3])
-    
+
 ## Clean destination
-for root, dires, files in os.walk(destinationDirectory):
+for root, dirs, files in os.walk(destinationDirectory):
     for f in files:
         os.remove(os.path.join(root, f))
 
+excl_dirs = {'../build', 'build', 'build/content'}
+
 for root, dirs, files in os.walk(sourceDirectory):
+    dirs[:] = [d for d in dirs if d not in excl_dirs]
     for f in files:
         if f.endswith(".md"):
+            print(f)
             shutil.copy2(os.path.join(root,f), os.path.join(destinationDirectory, f))
