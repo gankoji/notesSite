@@ -13,6 +13,7 @@ else:
     else:
         switch = False
 
+blacklist = {}
 if switch:
     # We're on windows
     sourceDirectory = "C:/Users/asaxp/OneDrive/Org/Slipbox"
@@ -32,12 +33,17 @@ if len(sys.argv) > 2:
     sourceDirectory = str(sys.argv[2])
     destinationDirectory = str(sys.argv[3])
 
+    if len(sys.argv) > 4:
+        ## We've also been passed an additional blacklist. 
+        blacklist = set(sys.argv[4].split(','))
+
 ## Clean destination
 for root, dirs, files in os.walk(destinationDirectory):
     for f in files:
         os.remove(os.path.join(root, f))
 
 excl_dirs = {'../build', 'build', 'build/content'}
+excl_dirs = excl_dirs.union(blacklist)
 
 for root, dirs, files in os.walk(sourceDirectory):
     dirs[:] = [d for d in dirs if d not in excl_dirs]
